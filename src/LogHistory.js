@@ -28,8 +28,7 @@ function LogHistory() {
     const [date, setDate] = useState(new Date()); 
     // 선택된 날짜의 운동 기록 (배열)
     const [selectedLogs, setSelectedLogs] = useState(dummyLogs[formatDate(new Date())] || []); // 초기값 설정
-
-    // 3. handleDateChange 함수를 컴포넌트 내부에 정의합니다. (오류 해결)
+    
     const handleDateChange = (newDate) => {
         setDate(newDate); // 선택된 날짜 업데이트
         
