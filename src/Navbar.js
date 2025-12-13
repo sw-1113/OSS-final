@@ -1,24 +1,32 @@
 import './nav.css'
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import icon from "./icon.jpg";
+import icon from "./image/icon.png";
 
 function Navbar() {
+
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+
     return (
         <nav>
-            <ul className="container">
+            <ul>
+                <li className="nav-left">
+                    <Link to="Main"><h2>My Fitness Tracker</h2></Link>
+                </li>
 
-                <li className="">
-                    <Link className="" to="Main"><h2>My Fitness Tracker</h2></Link>
+                <li className="right">
+                    <li>
+                        <Link to="Search">Search</Link>
+                    </li>
+                    {isLoggedIn ? (
+                        <img src={icon}/>
+                    ) : (
+                        <>
+                            <Link to="Login" className="nav-link">Login/sign up</Link>
+                        </>
+                    )}
                 </li>
-                <li className="">
-                    <Link className="nav-link" to="bbb">운동 추천</Link>
-                </li>
-                <li className="">
-                    <Link className="nav-link" to="Mypage">마이페이지</Link>
-                </li>
-                <img className="icon" src={icon}/>
             </ul>
-
         </nav>
     );
 }

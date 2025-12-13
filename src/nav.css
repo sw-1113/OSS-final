@@ -1,9 +1,11 @@
 nav a {
+    /* 링크 아래 줄 제거 */
     text-decoration: none;
     color: inherit;
 }
 
 nav ul {
+    /* li 세로 정렬 */
     display: flex;
     align-items: center;
     list-style: none;

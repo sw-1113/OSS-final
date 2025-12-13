@@ -1,15 +1,28 @@
-import './Main.css';
+import { useState } from "react";
 import { Link } from "react-router-dom";
+import "./Main.css";
 
 function Main() {
-    return (
-        <>
+  const [open, setOpen] = useState(false);
 
+  return (
+    <div className="main-container">
+      <div
+        className={`cover ${open ? "slide-up" : ""}`}
+        onClick={() => setOpen(true)}
+      >
+        <div className="cover-text">“오늘 한 만큼 내일 더 강해질 거야.”</div>
 
-            <main style={{ padding: "40px", textAlign: "center" }}>
+        <div
+          className="cover-trigger"
+          onMouseEnter={() => setOpen(true)}
+        >
+          ▼ Scroll / Click
+        </div>
+      </div>
 
-                <h1>“오늘 한 만큼 내일 더 강해질 거야.”</h1>
-                <p>운동을 기록하고, 추천 루틴을 받아보세요.</p>
+      <main className="main-contents">
+
 
                 <div style={{ marginTop: "30px", display: "flex", flexDirection: "column", gap: "15px", alignItems: "center" }}>
 
@@ -31,12 +44,8 @@ function Main() {
 
                 </div>
             </main>
-
-            <footer style={{ marginTop: "50px", padding: "20px", textAlign: "center", color: "#777" }}>
-                © 2025-2 Open studio
-            </footer>
-        </>
-    );
+    </div>
+  );
 }
 
 export default Main;
