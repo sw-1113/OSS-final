@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css'; 
+import Edit from './Edit';
 
 const MOCK_API_URL = 'https://6915405b84e8bd126af939f2.mockapi.io/FitnessTracker'; 
 
@@ -14,8 +15,6 @@ const formatDate = (date) => {
 
 const transformLogs = (data) => {
     return data.reduce((acc, log) => {
-        // 운동 상세 내용을 문자열로 조합 (예: 벤치 프레스 5x5 (60kg), 덤벨 로우 4x10 (20kg))
-        // RecordWorkout에서 저장된 exercises 배열을 사용
         const detailsString = log.exercises
             .map(ex => {
                 const weightPart = ex.weight ? ` (${ex.weight}kg)` : '';
@@ -28,6 +27,7 @@ const transformLogs = (data) => {
             id: log.id,
             routine: log.routineName, 
             details: detailsString,
+            originalLog: log,
         });
         return acc;
     }, {});
@@ -36,56 +36,89 @@ const transformLogs = (data) => {
 
 function LogHistory() {
     const [date, setDate] = useState(new Date()); 
-    // 전체 로그를 저장하고 관리하는 상태 (날짜를 키로 하는 객체 형식)
     const [allLogs, setAllLogs] = useState({}); 
-    // 달력에서 선택된 날짜의 로그만 저장하는 상태
     const [selectedLogs, setSelectedLogs] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [editingLog, setEditingLog] = useState(null); 
     
-    // 컴포넌트 마운트 시 MockAPI에서 운동 기록을 불러오는 로직
-    useEffect(() => {
-        const fetchLogs = async () => {
-            setLoading(true);
-            try {
-                const response = await fetch(MOCK_API_URL);
-                if (!response.ok) {
-                    throw new Error('데이터 불러오기 실패');
-                }
-                const data = await response.json();
-                
-                // 데이터를 캘린더/로그 목록을 위한 형식으로 변환
-                const logsByDate = transformLogs(data);
-                
-                setAllLogs(logsByDate);
-                
-                // 초기 로드 시 오늘 날짜의 기록을 표시
-                const initialDate = formatDate(new Date());
-                setSelectedLogs(logsByDate[initialDate] || []);
-
-            } catch (error) {
-                console.error("로그 로드 중 오류 발생:", error);
-                alert('운동 기록을 불러오지 못했습니다. 콘솔을 확인해주세요.');
-            } finally {
-                setLoading(false);
+    const fetchLogs = async () => {
+        setLoading(true);
+        try {
+            const response = await fetch(MOCK_API_URL);
+            if (!response.ok) {
+                throw new Error('데이터 불러오기 실패');
             }
-        };
+            const data = await response.json();
+            
+            const logsByDate = transformLogs(data);
+            
+            setAllLogs(logsByDate);
+            
+            const initialDate = formatDate(date);
+            setSelectedLogs(logsByDate[initialDate] || []);
 
+        } catch (error) {
+            console.error("로그 로드 중 오류 발생:", error);
+            alert('운동 기록을 불러오지 못했습니다. 콘솔을 확인해주세요.');
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    useEffect(() => {
         fetchLogs();
     }, []);
 
     
-    // 달력 날짜 변경 핸들러
     const handleDateChange = (newDate) => {
         setDate(newDate); 
         const formattedDate = formatDate(newDate);
-        // allLogs 상태에서 해당 날짜의 로그를 찾아 업데이트
         const logs = allLogs[formattedDate] || []; 
         setSelectedLogs(logs); 
+        setEditingLog(null);
     };
 
-    // 로딩 중일 때 표시
+    const handleDeleteLog = async (logId) => {
+        if (!window.confirm('정말로 이 운동 기록을 삭제하시겠습니까?')) {
+            return;
+        }
+
+        try {
+            const response = await fetch(`${MOCK_API_URL}/${logId}`, {
+                method: 'DELETE',
+            });
+
+            if (!response.ok) {
+                throw new Error('삭제 실패: ' + response.statusText);
+            }
+
+            alert('운동 기록이 삭제되었습니다.');
+            
+            fetchLogs(); 
+
+        } catch (error) {
+            console.error("로그 삭제 중 오류 발생:", error);
+            alert(`삭제 실패: ${error.message}`);
+        }
+    };
+
+    const handleEditLog = (log) => {
+        setEditingLog(log.originalLog);
+    };
+
+
     if (loading) {
         return <div style={{ textAlign: 'center', padding: '50px' }}>데이터 로딩 중...</div>;
+    }
+
+    if (editingLog) {
+        return (
+            <Edit
+                logData={editingLog}
+                onSave={() => { fetchLogs(); setEditingLog(null); }}
+                onCancel={() => setEditingLog(null)} 
+            />
+        );
     }
 
     return (
@@ -140,7 +173,22 @@ function LogHistory() {
                                     }}
                                 >
                                     <h4 style={{ margin: '0 0 5px 0', color: '#007bff' }}>{log.routine}</h4>
-                                    <p style={{ margin: '0', fontSize: '0.9em', color: '#555' }}>{log.details}</p>
+                                    <p style={{ margin: '0 0 10px 0', fontSize: '0.9em', color: '#555' }}>{log.details}</p>
+
+                                    <div style={{ display: 'flex', gap: '10px', justifyContent: 'flex-end' }}>
+                                        <button 
+                                            onClick={() => handleEditLog(log)}
+                                            style={{ padding: '5px 10px', backgroundColor: '#ffc107', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer' }}
+                                        >
+                                            수정
+                                        </button>
+                                        <button 
+                                            onClick={() => handleDeleteLog(log.id)}
+                                            style={{ padding: '5px 10px', backgroundColor: '#dc3545', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer' }}
+                                        >
+                                            삭제
+                                        </button>
+                                    </div>
                                 </div>
                             ))}
                         </div>

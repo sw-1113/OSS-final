@@ -73,7 +73,7 @@ function Record() {
 
             const result = await response.json();
             console.log("저장된 운동 기록:", result);
-            alert(`운동 기록(${result.id})이 성공적으로 저장되었습니다!`);
+            alert(`운동 기록이 성공적으로 저장되었습니다!`);
             
             // 저장 후 폼 초기화
             setLog({
