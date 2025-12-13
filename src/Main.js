@@ -13,9 +13,11 @@ function Main() {
 
                 <div style={{ marginTop: "30px", display: "flex", flexDirection: "column", gap: "15px", alignItems: "center" }}>
 
-                    <button style={{ padding: "10px 20px", width: "200px" }}>
-                        운동 기록하기
-                    </button>
+                    <Link to="/record" style={{ textDecoration: 'none' }}> 
+                        <button style={{ padding: "10px 20px", width: "200px" }}>
+                            운동 기록하기
+                        </button>
+                    </Link>
 
                     <button style={{ padding: "10px 20px", width: "200px" }}>
                         운동 추천 받기
