@@ -26,15 +26,17 @@ function Main() {
 
                 <div style={{ marginTop: "30px", display: "flex", flexDirection: "column", gap: "15px", alignItems: "center" }}>
 
-                    <Link to="/record" style={{ textDecoration: 'none' }}> 
+                    <Link to="/record" style={{ textDecoration: 'none' }}>
                         <button style={{ padding: "10px 20px", width: "200px" }}>
                             운동 기록하기
                         </button>
                     </Link>
 
-                    <button style={{ padding: "10px 20px", width: "200px" }}>
-                        운동 추천 받기
-                    </button>
+                    <Link to="/Search" style={{ textDecoration: 'none' }}>
+                      <button style={{ padding: "10px 20px", width: "200px" }}>
+                          운동 추천 받기
+                      </button>
+                    </Link>
 
                     <Link to="/history" style={{ textDecoration: 'none' }}>
                         <button style={{ padding: "10px 20px", width: "200px" }}>

@@ -5,7 +5,6 @@ import Edit from './Edit';
 
 const MOCK_API_URL = 'https://6915405b84e8bd126af939f2.mockapi.io/FitnessTracker'; 
 
-// 날짜 포맷팅 유틸 함수 (YYYY-MM-DD 형식)
 const formatDate = (date) => {
     const year = date.getFullYear();
     const month = String(date.getMonth() + 1).padStart(2, '0');
