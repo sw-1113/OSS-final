@@ -4,7 +4,6 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 function Login() {
-
     const [isSignUp, setIsSignUp] = useState(false);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [EM, setEM] = useState("");
