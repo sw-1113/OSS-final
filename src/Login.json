@@ -1,0 +1,22 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "name": "Kim",
+      "email": "kim@test.com",
+      "password": "1234"
+    },
+    {
+      "id": "2",
+      "name": "Park",
+      "email": "park@test.com",
+      "password": "abcd"
+    },
+    {
+      "id": "6c03",
+      "name": "jinsung",
+      "email": "kimswim02@gmail.com",
+      "password": "jitahemeinv24"
+    }
+  ]
+}
