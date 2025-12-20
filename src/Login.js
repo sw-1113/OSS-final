@@ -30,8 +30,8 @@ function Login() {
         if (user.password === PW) {
             localStorage.setItem("user", JSON.stringify(user));
             setIsLoggedIn(true);
-            console.log("로그인 성공!");
-            navigate("Main");
+            alert("로그인 성공!");
+            navigate("/Main");
         } else {
             alert("비밀번호가 틀렸습니다.");
         }
