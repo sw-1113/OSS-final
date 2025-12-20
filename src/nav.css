@@ -1,7 +1,5 @@
 nav {
   background: #ebecf0;
-  box-shadow: -5px -5px 10px #ffffff,
-               5px 5px 10px #babebc;
   padding: 18px 40px;
 }
 
@@ -35,7 +33,7 @@ nav a:hover {
 .right ul {
   display: flex;
   align-items: center;
-  gap: 25px;
+  gap: 30px;
 }
 
 .right li {
@@ -75,15 +73,20 @@ nav button:hover {
   transform: scale(0.95);
 }
 
-nav .right ul {
+.Mainicon{
+  width:70px;
+  height:auto;
+}
+.loggedinstate {
   display: flex;
   align-items: center;
-  gap: 24px; 
+  gap: 20px;
 }
 
-nav .right li {
+.loggedinstate li {
+  list-style: none;
   display: flex;
   align-items: center;
-  gap: 14px; 
 }
+
 

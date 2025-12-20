@@ -1,0 +1,164 @@
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css");
+
+.loghistory-page {
+  background: #ebecf0;
+  min-height: calc(100vh - 80px);
+  padding: 30px 20px;
+  font-family: "Montserrat", sans-serif;
+}
+
+.loghistory-title {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 800;
+  color: #000;
+  text-align: center;
+}
+
+.loghistory-layout {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  max-width: 1000px;
+  margin: 30px auto 0 auto;
+  flex-wrap: wrap;
+  text-align: left;
+}
+
+.loghistory-calendar-wrap {
+  flex: 0 0 auto;
+  padding: 18px;
+  border-radius: 14px;
+  background: #ebecf0;
+  box-shadow: -5px -5px 10px #ffffff,
+               5px 5px 10px #babebc;
+}
+
+.react-calendar {
+  border: none !important;
+  background: transparent !important;
+  font-family: "Montserrat", sans-serif;
+}
+
+.react-calendar__navigation button {
+  border-radius: 12px;
+  background: #ebecf0;
+  box-shadow: -3px -3px 7px #ffffff,
+               3px 3px 7px #babebc;
+  margin: 4px;
+  border: none;
+}
+
+.react-calendar__tile {
+  border-radius: 12px;
+  padding: 10px 6px;
+}
+
+.react-calendar__tile:enabled:hover,
+.react-calendar__tile:enabled:focus {
+  background: #ebecf0;
+  box-shadow: inset 2px 2px 5px #babebc,
+              inset -2px -2px 5px #ffffff;
+}
+
+.react-calendar__tile--active:enabled:hover,
+.react-calendar__tile--active:enabled:focus,
+.react-calendar__tile--active {
+  background: #ff4b2b !important;
+  color: #fff !important;
+  box-shadow: -4px -4px 8px #ff6b3f,
+               4px 4px 8px #bf4b2b;
+}
+
+.react-calendar__tile--now {
+  background: transparent !important;
+  position: relative;
+}
+
+.react-calendar__tile--now abbr {
+  border-bottom: 2px solid #ff4b2b;
+  padding-bottom: 2px;
+}
+
+.loghistory-list-wrap {
+  flex: 1 1 50%;
+  min-width: 350px;
+  padding: 18px;
+  border-radius: 14px;
+  background: #ebecf0;
+  box-shadow: -5px -5px 10px #ffffff,
+               5px 5px 10px #babebc;
+}
+
+.loghistory-date-title {
+  margin: 0 0 16px 0;
+  text-align: center;
+  font-size: 16px;
+  font-weight: 800;
+  color: #000;
+}
+
+.loghistory-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.loghistory-card {
+  padding: 14px 16px;
+  border-radius: 14px;
+  background: #ebecf0;
+  box-shadow: -4px -4px 8px #ffffff,
+               4px 4px 8px #babebc;
+}
+
+.loghistory-card h4 {
+  margin: 0 0 6px 0;
+  font-size: 14px;
+  font-weight: 900;
+  color: #ff4b2b; 
+}
+
+.loghistory-card p {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 600;
+  color: #333;
+  letter-spacing: 0.2px;
+}
+
+.loghistory-empty {
+  text-align: center;
+  color: #333;
+  padding: 18px;
+  border-radius: 14px;
+  background: #ebecf0;
+  box-shadow: inset 3px 3px 6px #babebc,
+              inset -3px -3px 6px #ffffff;
+  font-weight: 700;
+  font-size: 13px;
+}
+
+.loghistory-loading {
+  text-align: center;
+  padding: 50px;
+  font-weight: 800;
+  color: #000;
+}
+
+.loghistory-dot {
+  color: #ff4b2b;
+  font-size: 12px;
+  line-height: 10px;
+  margin-top: 3px;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .loghistory-layout {
+    gap: 18px;
+  }
+  .loghistory-list-wrap {
+    min-width: 280px;
+  }
+}
