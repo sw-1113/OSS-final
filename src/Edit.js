@@ -6,7 +6,7 @@ function Edit({ logData, onSave, onCancel }) {
     
     const [editLog, setEditLog] = useState({
         ...logData,
-        exercises: logData.exercises.map(ex => ({ ...ex })) 
+        exercises: logData?.exercises ? logData.exercises.map(ex => ({ ...ex })) : []
     });
 
     const handleLogChange = (e) => {
